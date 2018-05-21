@@ -1,9 +1,9 @@
 'use strict';
 
 // require('dotenv').config();
-const bodyParser = require('body-parser');  
-const url = require('url');  
-const querystring = require('querystring');  
+const bodyParser = require('body-parser');
+const url = require('url');
+const querystring = require('querystring');
 const express = require('express');
 const app = express();
 
@@ -17,14 +17,8 @@ const server = app.listen(process.env.PORT || 8080, () => {
   console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
 });
 
-app.get('/', function(req, res) {
-  var user_id = req.query.id;
-  console.log('user_id'+user_id);
-  res.sendFile(__dirname + '/views/base.html');
-});
-
 const projectId = 'payablesv2'; //https://dialogflow.com/docs/agents#settings
-const sessionId = 'quickstart-session-id';
+var sessionId = 'abc';
 var first_query = 'hello';
 const languageCode = 'en-US';
 var response_txt = '';
@@ -33,19 +27,11 @@ var response_txt = '';
 const dialogflow = require('dialogflow');
 const sessionClient = new dialogflow.SessionsClient();
 
-// Define session path
-const sessionPath = sessionClient.sessionPath(projectId, sessionId);
-
-// The text query request.
-var request = {
-  session: sessionPath,
-  queryInput: {
-    text: {
-      text: first_query,
-      languageCode: languageCode,
-    },
-  },
-};
+app.get('/', function (req, res) {
+  sessionId = req.query.id;
+  console.log('sessionId' + sessionId);
+  res.sendFile(__dirname + '/views/base.html');
+});
 
 const io = require('socket.io')(server);
 
@@ -55,11 +41,28 @@ const io = require('socket.io')(server);
 
 io.on('connection', function (socket) {
   console.log('a user connected');
+  console.log('sessionId11: '+sessionId);
+
+  // Define session path
+  let sessionPath = sessionClient.sessionPath(projectId, sessionId);
+
+  // The text query request.
+  let request = {
+    session: sessionPath,
+    queryInput: {
+      text: {
+        text: first_query,
+        languageCode: languageCode,
+      },
+    },
+  };
 
   socket.on('chat message', (text) => {
     console.log('Message: ' + text);
+
     // Get a reply from API.ai
     request.queryInput.text.text = text;
+    console.log(request.session);
     // Send request and log result
     sessionClient
       .detectIntent(request)
