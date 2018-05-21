@@ -17,17 +17,10 @@ const server = app.listen(process.env.PORT || 8080, () => {
   console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
 });
 
-// Web UI
-app.get('/', (req, res) => {
-  var user_id = req.param('id');
+app.get('/', function(req, res) {
+  var user_id = req.query.id;
   console.log('user_id'+user_id);
-  res.send(user_id);
-  // res.sendFile('index.html?id='+user_id);
-});
-
-app.post('/', function(req, res) {
-  var user_id = req.body.id;
-  res.send(user_id);
+  res.sendFile(__dirname + '/views/base.html');
 });
 
 const projectId = 'payablesv2'; //https://dialogflow.com/docs/agents#settings
@@ -56,14 +49,15 @@ var request = {
 
 const io = require('socket.io')(server);
 
+// io.on('connection', function (socket) {
+//   console.log('a user connected');
+// });
+
 io.on('connection', function (socket) {
   console.log('a user connected');
-});
 
-io.on('connection', function (socket) {
   socket.on('chat message', (text) => {
     console.log('Message: ' + text);
-
     // Get a reply from API.ai
     request.queryInput.text.text = text;
     // Send request and log result
