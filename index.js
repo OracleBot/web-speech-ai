@@ -1,18 +1,38 @@
 'use strict';
 
-require('dotenv').config()
-// const APIAI_TOKEN = process.env.APIAI_TOKEN;
-// const APIAI_SESSION_ID = process.env.APIAI_SESSION_ID;
-
+// require('dotenv').config();
+const bodyParser = require('body-parser');  
+const url = require('url');  
+const querystring = require('querystring');  
 const express = require('express');
 const app = express();
 
 app.use(express.static(__dirname + '/views')); // html
 app.use(express.static(__dirname + '/public')); // js, css, images
 
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
+const server = app.listen(process.env.PORT || 8080, () => {
+  console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
+});
+
+// Web UI
+app.get('/', (req, res) => {
+  var user_id = req.param('id');
+  console.log('user_id'+user_id);
+  res.send(user_id);
+  // res.sendFile('index.html?id='+user_id);
+});
+
+app.post('/', function(req, res) {
+  var user_id = req.body.id;
+  res.send(user_id);
+});
+
 const projectId = 'payablesv2'; //https://dialogflow.com/docs/agents#settings
 const sessionId = 'quickstart-session-id';
-var query = 'hello';
+var first_query = 'hello';
 const languageCode = 'en-US';
 var response_txt = '';
 
@@ -28,26 +48,16 @@ var request = {
   session: sessionPath,
   queryInput: {
     text: {
-      text: query,
+      text: first_query,
       languageCode: languageCode,
     },
   },
 };
 
-const server = app.listen(process.env.PORT || 8080, () => {
-  console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
-});
-
 const io = require('socket.io')(server);
+
 io.on('connection', function (socket) {
   console.log('a user connected');
-});
-
-// const apiai = require('apiai')(APIAI_TOKEN);
-
-// Web UI
-app.get('/', (req, res) => {
-  res.sendFile('index.html');
 });
 
 io.on('connection', function (socket) {

@@ -2,8 +2,6 @@
 
 const socket = io();
 var botui = new BotUI('api-bot');
-// const outputYou = document.querySelector('.output-you');
-// const outputBot = document.querySelector('.output-bot');
 const textarea = document.querySelector('.message-to-send');
 
 
@@ -95,12 +93,3 @@ document.querySelector('.text-btn').addEventListener('click', () => {
   socket.emit('toServer', textarea.value);
   textarea.value = "";
 });
-
-
-// then(function(){
-//   botui.action.text({
-//     action: {
-//       placeholder: 'Enter your text here'
-//     }
-//   })
-// });
