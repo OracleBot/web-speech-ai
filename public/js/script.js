@@ -4,10 +4,9 @@ const socket = io();
 var botui = new BotUI('api-bot');
 const textarea = document.querySelector('.message-to-send');
 
-
+//Speech recognition and pronounciation
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
-
 recognition.lang = 'en-US';
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
@@ -16,26 +15,31 @@ document.querySelector('.speech').addEventListener('click', () => {
   recognition.start();
 });
 
+// botui.message.add({
+//   content: 'Hello...',
+//   delay: 500,
+// });
+
 recognition.addEventListener('speechstart', () => {
   console.log('Speech has been detected.');
 });
 
 recognition.addEventListener('result', (e) => {
   console.log('Result has been detected.');
-
   let last = e.results.length - 1;
   let text = e.results[last][0].transcript;
-
+  
+  //Sending recognised text to UI
   botui.message.add({
     human: true,
-    content: text,
-    delay: 500,
+    content: text
   });
 
-  // outputYou.textContent = text;
-  console.log('Confidence: ' + e.results[0][0].confidence);
+  //Send the recognised text to Socket.io
+  socket.emit('h_voice', text);
 
-  socket.emit('chat message', text);
+  //Confidence of recognition
+  console.log('Confidence: ' + e.results[0][0].confidence);
 });
 
 recognition.addEventListener('speechend', () => {
@@ -43,10 +47,8 @@ recognition.addEventListener('speechend', () => {
 });
 
 recognition.addEventListener('error', (e) => {
-  // outputBot.textContent = 'Error: ' + e.error;
-  botui.message.add({
-    content: 'Error: ' + e.error,
-    delay: 500,
+ botui.message.add({
+    content: 'Error: ' + e.error
   });
 });
 
@@ -57,39 +59,43 @@ function synthVoice(text) {
   synth.speak(utterance);
 }
 
-socket.on('bot reply', function (replyText) {
+socket.on('b_voicereply', function (replyText) {
   synthVoice(replyText);
-
   if (replyText == '') replyText = '(No answer...)';
-  // outputBot.textContent = replyText;
   botui.message.add({
-    content: replyText,
-    delay: 500,
-  });
-
-});
-
-socket.on('fromServer', function (data) {
-  console.log(data);
-  botui.message.add({
-    content: data,
-    delay: 500,
+    content: replyText
   });
 });
 
-botui.message.add({
-  content: 'Hello...',
-  delay: 500,
-});
-
+//Sending human request to Socket.io server on click of send button
 document.querySelector('.text-btn').addEventListener('click', () => {
   console.log(textarea.value);
-
+  
   botui.message.add({
     human: true,
-    content: textarea.value,
-    delay: 500,
+    content: textarea.value
   });
-  socket.emit('toServer', textarea.value);
+  socket.emit('h_text', textarea.value);
   textarea.value = "";
+});
+
+//Sending human request to Socket.io server on pressing return in text area
+document.querySelector('.message-to-send').addEventListener('keyup', function(e) {
+  if(e.keyCode === 13) {
+    console.log(textarea.value);
+  
+    botui.message.add({
+      human: true,
+      content: textarea.value
+    });
+    
+    socket.emit('h_txt', textarea.value);
+    textarea.value = "";
+  }
+});
+
+socket.on('b_txtreply', function (data) {
+  botui.message.add({
+    content: data
+  });
 });
