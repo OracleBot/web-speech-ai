@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Simple AI Chat Bot Demo with Web Speech API">
+  <meta name="author" content="Tomomi Imura  @girlie_mac">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui-theme-default.css" />
+  <link rel="stylesheet" href="stylesheets/black.css" />
+  <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.js"></script>
+  <script src="https://cdn.jsdelivr.net/vue/latest/vue.min.js"></script>
+  <title>Payables Bot</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <section>
+    <h1>Payables Bot</h1>
+
+    <button class="speech">
+      <i class="fa fa-microphone"></i>
+    </button>
+<!-- 
+    <div>
+      <p>You said:
+        <em class="output-you">...</em>
+      </p>
+      <p>Bot replied:
+        <em class="output-bot">...</em>
+      </p>
+    </div> -->
+  </section>
+
+  <div class="botui-app-container" id="api-bot">
+    <bot-ui></bot-ui>
+  </div>
+  <div class="chat-message clearfix" id="footer">
+    <textarea name="message-to-send" id="message-to-send" class="message-to-send" placeholder="Type your message" rows="1"></textarea>
+    <button class="text-btn">Send</button>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+
+</html>
