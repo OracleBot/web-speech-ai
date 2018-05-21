@@ -1,2 +1,4 @@
 runtime: nodejs
 env: flex
+env_variables:
+  GOOGLE_APPLICATION_CREDENTIALS: "./PayablesV2-566b7fa89022.json"

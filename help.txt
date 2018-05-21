@@ -1,0 +1,9 @@
+Deployed service [default] to [https://payablesv2.appspot.com]
+
+You can stream logs from the command line by running:
+  $ gcloud app logs tail -s default
+
+To view your application in the web browser run:
+  $ gcloud app browse
+
+https://payablesv2.appspot.com
