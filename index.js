@@ -66,16 +66,30 @@ io.on('connection', function (socket) {
 
       // Get a reply from Dialogflow
       request.queryInput.text.text = text;
-
+      let bot_reply = null;
       // Send request and log result
       sessionClient
         .detectIntent(request)
         .then(responses => {
+          console.log(responses)
           const result = responses[0].queryResult;
-          console.log(`  Query: ${result.queryText}`);
+          const webhook = responses[0].webhookStatus;
 
-          var bot_reply = result.fulfillmentText;
-          console.log(`  Response: ${bot_reply}`);
+          if (webhook != null) {
+            if (webhook.code == 4) {
+              bot_reply = webhook.message;
+              console.log(`  Webhook: ${webhook.message}`);
+            }
+            else {
+              console.log(`  Query: ${result.queryText}`);
+              bot_reply = result.fulfillmentText;
+              console.log(`  Response: ${bot_reply}`);
+            }
+          } else {
+            console.log(`  Query: ${result.queryText}`);
+            bot_reply = result.fulfillmentText;
+            console.log(`  Response: ${bot_reply}`);
+          }
 
           //Sending reply back to Socket.io client
           socket.emit('b_voicereply', bot_reply);
@@ -97,16 +111,32 @@ io.on('connection', function (socket) {
 
       // Get a reply from API.ai
       request.queryInput.text.text = text;
-
+      let bot_reply = null;
       // Send request and log result
       sessionClient
         .detectIntent(request)
         .then(responses => {
+          console.log(responses)
           const result = responses[0].queryResult;
-          console.log(`  Query: ${result.queryText}`);
-          var bot_reply = result.fulfillmentText;
-          console.log(`  Response: ${bot_reply}`);
+          const webhook = responses[0].webhookStatus;
 
+          if (webhook != null) {
+            if (webhook.code == 4) {
+              bot_reply = webhook.message;
+              console.log(`  Webhook: ${webhook.message}`);
+            }
+            else {
+              console.log(`  Query: ${result.queryText}`);
+              bot_reply = result.fulfillmentText;
+              console.log(`  Response: ${bot_reply}`);
+            }
+          } else {
+            console.log(`  Query: ${result.queryText}`);
+            bot_reply = result.fulfillmentText;
+            console.log(`  Response: ${bot_reply}`);
+          }
+
+          //Sending reply back to Socket.io client
           socket.emit('b_txtreply', bot_reply);
 
           if (result.intent) {
@@ -122,5 +152,4 @@ io.on('connection', function (socket) {
   } else {
     console.log('Session Invalid or Null');
   }
-
 });
