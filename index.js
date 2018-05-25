@@ -1,16 +1,10 @@
 'use strict';
 
-// const bodyParser = require('body-parser');
-// const url = require('url');
-// const querystring = require('querystring');
 const express = require('express');
 const app = express();
 
 app.use(express.static(__dirname + '/views')); // html
 app.use(express.static(__dirname + '/public')); // js, css, images
-
-// app.use(bodyParser.json()); // support json encoded bodies
-// app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 //Start listening
 const server = app.listen(process.env.PORT || 8080, () => {
@@ -104,11 +98,11 @@ io.on('connection', function (socket) {
         .then(responses => {
           const result = responses[0].queryResult;
           console.log(`  Query: ${result.queryText}`);
+
           var bot_reply = result.fulfillmentText;
           console.log(`  Response: ${bot_reply}`);
 
           socket.emit('b_txtreply', bot_reply);
-
           if (result.intent) {
             console.log(`  Intent: ${result.intent.displayName}`);
           } else {
