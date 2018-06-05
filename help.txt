@@ -8,4 +8,6 @@ To view your application in the web browser run:
 
 https://payablesv2.appspot.com
 
-$env:GOOGLE_APPLICATION_CREDENTIALS= "C:/Users/dipverma/Node/web-speech-ai/PayablesV2-566b7fa89022.json"
+$env:GOOGLE_APPLICATION_CREDENTIALS= "C:/Users/dipverma/Node/web-speech-ai/Agent-Dev1-0d205ae4a0e3.json"
+
+gcloud beta functions deploy payablesWebhook --stage-bucket staging.agent-dev1.appspot.com --trigger-http
