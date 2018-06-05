@@ -73,7 +73,7 @@ document.querySelector('.text-btn').addEventListener('click', () => {
   
   botui.message.add({
     human: true,
-    content: textarea.value
+    content: textarea.value 
   });
   socket.emit('h_text', textarea.value);
   textarea.value = "";
