@@ -1,8 +1,5 @@
 'use strict';
 
-// const bodyParser = require('body-parser');
-// const url = require('url');
-// const querystring = require('querystring');
 const express = require('express');
 const app = express();
 
@@ -21,7 +18,7 @@ const server = app.listen(process.env.PORT || 8080, () => {
 const io = require('socket.io')(server);
 
 //DialogFlow defaults
-const projectId = 'payablesv2'; //https://dialogflow.com/docs/agents#settings
+const projectId = 'ardysdev1'; //https://dialogflow.com/docs/agents#settings
 let sessionId = null;
 let first_query = null;
 const languageCode = 'en-US';
