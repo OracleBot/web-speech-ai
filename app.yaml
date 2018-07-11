@@ -1,4 +1,4 @@
 runtime: nodejs
 env: flex
 env_variables:
-  GOOGLE_APPLICATION_CREDENTIALS: "./ardysdev1-b60ecccb578d.json"
+  GOOGLE_APPLICATION_CREDENTIALS: "./ardysdev1-f18c9736c502.json"

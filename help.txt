@@ -11,3 +11,5 @@ https://payablesv2.appspot.com
 $env:GOOGLE_APPLICATION_CREDENTIALS= "C:/Users/dipverma/Node/web-speech-ai/ardysdev1-b60ecccb578d.json"
 
 gcloud beta functions deploy payablesWebhook --stage-bucket staging.agent-dev1.appspot.com --trigger-http
+
+export GOOGLE_APPLICATION_CREDENTIALS=/Users/diprish/Documents/Node/web-speech-ai/ardysdev1-f18c9736c502.json
