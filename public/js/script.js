@@ -71,7 +71,7 @@ document.querySelector('.text-btn').addEventListener('click', () => {
     human: true,
     content: textarea.value
   });
-  socket.emit('h_text', textarea.value);
+  socket.emit('fromClient', textarea.value);
   textarea.value = "";
 });
 
@@ -85,7 +85,7 @@ document.querySelector('.message-to-send').addEventListener('keyup', function (e
       content: textarea.value
     });
 
-    socket.emit('h_txt', textarea.value);
+    socket.emit('fromClient', textarea.value);
     textarea.value = "";
   }
 });
@@ -106,10 +106,10 @@ botui.message.add({
     }
   }
   ).then(function (res) {
-    socket.emit('h_txt', { client: res.value }); // sends the message typed to server
+    socket.emit('fromClient', { client: res.value }); // sends the message typed to server
     console.log(res.value); // will print whatever was typed in the field.
   }).then(function () {
-    socket.on('b_txtreply', function (data) { // recieveing a reply from server.
+    socket.on('fromServer', function (data) { // recieveing a reply from server.
       console.log(data.server);
       newMessage(data.server);
       addAction();
