@@ -63,6 +63,7 @@ socket.on('b_voicereply', function (replyText) {
   });
 });
 */
+
 //Sending human request to Socket.io server on click of send button
 document.querySelector('.text-btn').addEventListener('click', () => {
   console.log(textarea.value);

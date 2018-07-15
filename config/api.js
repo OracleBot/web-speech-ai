@@ -29,8 +29,8 @@ var getRes = function (query) {
     // Get a reply from API.ai
     request.queryInput.text.text = query;
 
-    let bot_reply = null;
-    
+    let bot_reply = 'No';
+
     // Send request and log result
     sessionClient
         .detectIntent(request)
@@ -55,25 +55,18 @@ var getRes = function (query) {
                 console.log(`  Response: ${bot_reply}`);
             }
 
-            //Sending reply back to Socket.io client
-            socket.emit('b_txtreply', bot_reply);
+            socket.emit('fromServer', bot_reply);
 
             if (result.intent) {
                 console.log(`  Intent: ${result.intent.displayName}`);
             } else {
                 console.log(`  No intent matched.`);
             }
+            return bot_reply;
         })
         .catch(err => {
             console.error('ERROR:', err);
         });
-
-    return bot_reply;
 };
-
-
-
-// test the command :
-//getRes('hello').then(function(res){console.log(res)});
 
 module.exports = { getRes }
