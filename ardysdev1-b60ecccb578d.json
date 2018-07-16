@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "ardysdev1",
+  "private_key_id": "b60ecccb578d6bfb4deb775f5d94adf28b7f1658",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC7R6iXm5panmie\nD1Uo9ZBqpyykT2y+E7wlRN4y3UEjdu4kxdEqdHFqwCwsy/n2Qr+CA93dftDm6UW2\nTlUvWRc+4ej1qT+9fSCSeVCZbEp2PmW5t3Vy77ruiB07RVka0Qcrb3kjk9IG7yeH\nwFCTn2N6700oEcjGxUZxh5ckTAcW88gDP8xCPg7hqdkd+lSB30BGdsE41mxz4vmV\nzzu5uEh16nyFx6xoLb/7MYPqb634Dxgrr2VRpMBL9G4sjsHsz/aWrdBwMEeh3UlX\nOrlpR4DHQLmO4YWl2/iAWREdoQV7Ng8fmJXeUfax9Kw8HC+h0HVyxdsHBjtckaTs\nasOd2R+nAgMBAAECggEAA4MTgUxUt7BSy+wDr9HzFFzwNGCc7G+YTqac+B04FH8t\ndhkTlBU870CNU4W7uUeFKd4Csh2nszzaptGPPWURT4eTA9BZtqb7DmQiA86JEvCW\nncX3+ODQA5sf2TWytxMGbGUZw3YJMUIY3q3XlP0fM3X7X2398uROLuDZD8AxPdfq\nQIO6SpArsx9SHFoErPQXvMxljqSFQQGlKVud/Loa0NX06sFXbpDkPtdGtMbFZlu2\n72WoHe7pSODW/YGDSXJfiLjHKXsm2GjxP5rveWh5qszUxoSD2+heLgZXWOEhivGf\nnz1k7aFABRLsRBTcKzWGR2J4oZAuqA+LGj+YqrW7mQKBgQDvdfKVpTOCF/jsyB23\nJRV9bOM/9soIoIO66A5PMyfZiChiAENO9mkorfXtIYlcd7mtV2DPwUD/6Guykzm6\nUMyo1wwRswYdgqN85hpYqzIpJhPThvaiz2u8orv8QA32If7gRs71SxkXQS1D7YVq\ntULDaCO167qRrG/2tslRMr5QkwKBgQDINxHjcP5p8NjePUFtCvmGrI45LZ5t7C5C\nbW9oLw8ss7CobveD/8LBbxOwmll4oniPDNdUc6NyHK+2UcfYist7w1Dy99b8LdnX\n/htctphY0nBEhrYbnYaA8HXX/wLULQV9Z3glrGOlrJKjC+gphK0MC7oYmfsBVNrT\nHzJw5YBlHQKBgQCzMc2GJKkl+nCCKMLr8eliAeERVcocqJnLfapvpDV2+QhXRiEY\nbxeEpKG7gXQ8aS/ewtukvNa6aqBlcv0pKxvsYXkbqZ+y57cWWU9v+TTBTEhb68yX\nS6cw84q/muOXxBrqlLJ9J2SwXUrVYWKM1vYOKtlGYxArwSHMOz7t744x1wKBgFDC\nPdnzIvwSpTeHl9NnIN1czwVrTENkiAhNYimxCbrrRC+8iuRYjvM9XcDXkY1iY6S3\n9kdfWadWwN2WwTisS4XBc+59X99ak0tXeSv9jxgM0jIh8GTVNoLd+3rDpx10h4lc\n6g6wKYWTRZa039GXbcG1HTx9J80SsC2GoO7+87pVAoGAIo1gc9wbRyi03EP67URA\nMbTgSM8qudszq8dkwS9USK+9kLCTjQeK4W/uHg8gxa+uEELa0qmCk0G/ew6YRbnq\nXfYnc77oTuzSmI9pzZflG0Mu11M/6KIMLo7cJQ1opzERR8wI1+MLjolkU+MCP7wP\nu3RCFgnlURalj7KZblMIH04=\n-----END PRIVATE KEY-----\n",
+  "client_email": "nodewebapp@ardysdev1.iam.gserviceaccount.com",
+  "client_id": "116386242856624911882",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nodewebapp%40ardysdev1.iam.gserviceaccount.com"
+}
