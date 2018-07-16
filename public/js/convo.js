@@ -62,7 +62,7 @@ socket.on('b_voicereply', function (replyText) {
     content: replyText
   });
 });
-*/
+
 
 //Sending human request to Socket.io server on click of send button
 document.querySelector('.text-btn').addEventListener('click', () => {
@@ -96,6 +96,7 @@ socket.on('b_txtreply', function (data) {
     content: data
   });
 });
+*/
 
 botui.message.add({
   content: 'Lets Start Talking...',
@@ -107,16 +108,17 @@ botui.message.add({
     }
   }
   ).then(function (res) {
+    console.log('convo.js::res.value ' + res.value); // will print whatever was typed in the field.
     socket.emit('fromClient', { client: res.value }); // sends the message typed to server
-    console.log(res.value); // will print whatever was typed in the field.
-  }).then(function () {
-    socket.on('fromServer', function (data) { // recieveing a reply from server.
-      console.log(data.server);
-      newMessage(data.server);
-      addAction();
-    })
+
   });
 })
+
+socket.on('fromServer', function (data) {
+  console.log(data.server);
+  newMessage(data.server);
+  addAction();
+});
 
 function newMessage(response) {
   botui.message.add({

@@ -5,6 +5,12 @@ let first_query = null;
 const languageCode = 'en-US';
 let response_txt = null;
 
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+
+
 // Instantiate a DialogFlow client.
 const dialogflow = require('dialogflow');
 const sessionClient = new dialogflow.SessionsClient();
@@ -32,6 +38,7 @@ var getRes = function (query) {
     let bot_reply = 'No';
 
     // Send request and log result
+    /*
     sessionClient
         .detectIntent(request)
         .then(responses => {
@@ -54,8 +61,8 @@ var getRes = function (query) {
                 bot_reply = result.fulfillmentText;
                 console.log(`  Response: ${bot_reply}`);
             }
-
-            socket.emit('fromServer', bot_reply);
+            console.log('Server Ready to transmit');
+            // socket.emit('fromServer', bot_reply);
 
             if (result.intent) {
                 console.log(`  Intent: ${result.intent.displayName}`);
@@ -67,6 +74,38 @@ var getRes = function (query) {
         .catch(err => {
             console.error('ERROR:', err);
         });
+        */
+    // Send request and log result
+    sessionClient
+        .detectIntent(request)
+        .then(responses => {
+            console.log('Detected intent');
+            const result = responses[0].queryResult;
+            console.log(`  Query: ${result.queryText}`);
+            console.log(`  Response: ${result.fulfillmentText}`);
+            if (result.intent) {
+                console.log(`  Intent: ${result.intent.displayName}`);
+                bot_reply = result.fulfillmentText;
+            } else {
+                console.log(`  No intent matched.`);
+            }
+            return bot_reply;
+        })
+        .then(function (res) {
+            console.log('response', res);
+            fromServer(res);
+        })
+        .catch(err => {
+            console.error('ERROR:', err);
+        });
+
 };
+
+function fromServer(res) {
+    console.log('Back to ' + res);
+    io.on('connection', function (socket) {
+        socket.emit('fromServer', { server: res });
+    });
+}
 
 module.exports = { getRes }

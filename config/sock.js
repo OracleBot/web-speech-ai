@@ -13,7 +13,6 @@ app.use(express.static(__dirname + '/../public')); // js, css, images
 
 var conn = function () {
     server.listen(8080);
-
     app.get('/', function (req, res) {
         console.log(__dirname)
         res.render('index', { title: 'The index page!' });
@@ -23,12 +22,20 @@ var conn = function () {
 var fromClient = function () {
     io.on('connection', function (socket) {
         socket.on('fromClient', function (data) {
-            console.log(data.client);
-            api.getRes(data.client).then(function (res) {
-                console.log('response', res);
-                socket.emit('fromServer', { server: res });
-            });
+            console.log('sock.js::data.client ' + data.client);
+            api.getRes(data.client);
         });
     });
-}
+};
+
+var fromServer = function (res) {
+    console.log('Back to ' + res);
+    // io.on('connection', function (socket) {
+    //     socket.emit('fromServer', { server: res });
+    // });
+};
+
+
+
+
 module.exports = { conn, fromClient }
